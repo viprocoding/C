@@ -1,2 +1,2 @@
-C-programming
+Generic Stack
 =============
