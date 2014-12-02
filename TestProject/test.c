@@ -2,8 +2,8 @@
 
 int main(int argc, char *argv[])
 {
-	// Developer A
-	printf("Developer A is the best\n");
+	// Developer A ( LOL -- Developer B is best)
+	printf("Developer B is the best\n");
 
 	return 0;
 }
