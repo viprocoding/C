@@ -8,6 +8,8 @@
  * Run		./fib		or 		./fib n
  */
 
+// Sneaky add
+
 // libraires
 #include <stdio.h>		// printf, fgetc
 #include <stdlib.h>		// atoi 
