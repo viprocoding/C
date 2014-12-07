@@ -6,32 +6,23 @@ CC = gcc
 #	Werror	- Don't allow compiling if there are any warnings
 #	ansi	- Follow ansi standard
 #	std=c11 - Follow c11 standard
-CFLAGS = -Wall -Werror -ansi -std=c11
+#   ggdb    - Add extra information for debugging (GDB)
+CFLAGS = -Wall -Werror -ansi -std=c11 -ggdb
 
 # Object files
-OBJECTS = stackTest.o stack.o
+OBJS = stack.o stackTest.o
 
 # Executable name
 EXE = stackTest.exe
 
 # Build program
-$(EXE): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(EXE) $(OBJECTS)
+$(EXE): $(OBJS)
+	$(CC) $(CFLAGS) $^ -o $@
 
-# Compile Object files
-stackTest.o: stackTest.o
-	$(CC) $(CFLAGS) -c stackTest.c
+# Compile all src files to object files
+%.o : %.c %.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
-stack.o: stack.c stack.h
-	$(CC) $(CFLAGS) -c stack.c
-
-# Clean up options
-.PHONY: cleanObj cleanExe clean
-
-cleanObj:
-	rm *.o
-
-cleanExe:
-	rm *.exe
-
-clean: cleanObj cleanExe
+.PHONY: clean
+clean:
+	rm -f *.o *.exe	
