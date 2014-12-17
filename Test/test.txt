@@ -1,8 +1,0 @@
-17.40:
-	Master was here
-
-	Batman was here
-
-	Spiderman was here
-
-	// Fixed conflict when merging
