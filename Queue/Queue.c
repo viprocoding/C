@@ -1,5 +1,6 @@
 #include "Queue.h"
 #include <stdlib.h>		// malloc
+#include <string.h>		// memcpy
 
 static int queueGrow(queue_t* q)
 {
@@ -36,8 +37,13 @@ int queueDispose(queue_t* q)
 
 int queueEnqueue(queue_t* q, void* elem)
 {
-	// todo	
-	return 0;
+	if (queueIsFull(q))
+		if (queueGrow(q) == ERR_REALLOC)
+			return ERR_REALLOC;
+	
+	// Enqueue
+	memcpy((char*) q->elems + q->currentSize * q->elemSize, elem, q->elemSize);
+	return SUCCESS;
 }
 
 int queueDequeue(queue_t* q, void* elem)
