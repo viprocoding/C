@@ -41,12 +41,10 @@ int queueDequeue(queue_t* q, void* elem)
 
 int queueIsFull(queue_t* q)
 {
-	// todo
-	return 0;
+	return q->capacity == q->currentSize;
 }
 
 int queueIsEmpty(queue_t* q)
 {
-	//  todo
-	return 0;
+	return !q->currentSize;
 }
