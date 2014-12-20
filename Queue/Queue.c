@@ -67,14 +67,14 @@ int queueInit(queue_t* q, int elemSize, void (*freeFnk)(void*))
 void queueDispose(queue_t* q)
 {
     if (q->freeFnk) {
-		char tmp[q->elemSize];
+        char tmp[q->elemSize];
 
-		// free all elems that currently resides in the queue
+        // free all elems that currently resides in the queue
         for (int i = 0, n = q->currentSize; i < n; i++) {
             queueDequeue(q, &tmp);
             q->freeFnk(tmp);
         }
-	}
+    }
 
     // clean up
     free(q->elems);
