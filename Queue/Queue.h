@@ -31,10 +31,11 @@ typedef struct Queue
 	int   front;
 	int   elemSize;
 	void* elems;
-	// free fnk
+	
+	void (*freeFnk)(void* elem);
 } queue_t;
 
-int queueInit(queue_t* q, int elemSize /*, freeFnk... */);
+int queueInit(queue_t* q, int elemSize, void (*freeFnk)(void* elem));
 int queueDispose(queue_t* q);
 int queueEnqueue(queue_t* q, void* elem);
 int queueDequeue(queue_t* q, void* elem);

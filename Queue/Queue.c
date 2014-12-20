@@ -24,7 +24,7 @@ static int queueGrow(queue_t* q)
 	return SUCCESS;
 }
 
-int queueInit(queue_t* q, int elemSize /*, freeFnk ... */)
+int queueInit(queue_t* q, int elemSize, void (*freeFnk)(void*))
 {
 	if (elemSize < 1)
 		return ERR_INVALID_ARGUMENT;
@@ -35,12 +35,21 @@ int queueInit(queue_t* q, int elemSize /*, freeFnk ... */)
 	q->front       = 0;
 	q->elemSize    = elemSize;
 	q->elems       = malloc(q->capacity * q->elemSize);
+	q->freeFnk     = freeFnk;
 
 	return q->elems ? SUCCESS : ERR_MALLOC;
 }
 
 int queueDispose(queue_t* q)
 {
+	void *tmp = NULL;
+
+	if (q->freeFnk)
+		for (int i = 0, n = q->currentSize; i < n; i++) {
+			queueDequeue(q, tmp);	// here q is never empty -- dont error check
+			q->freeFnk(tmp);
+		}
+
 	free(q->elems);
 	q->capacity = q->currentSize = q->front = q->elemSize = -1;
 	q->elems = NULL;
