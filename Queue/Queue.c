@@ -41,7 +41,10 @@ int queueInit(queue_t* q, int elemSize /*, freeFnk ... */)
 
 int queueDispose(queue_t* q)
 {
-	// todo
+	free(q->elems);
+	q->capacity = q->currentSize = q->front = q->elemSize = -1;
+	q->elems = NULL;
+	
 	return 0;
 }
 
