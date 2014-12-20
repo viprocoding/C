@@ -1,5 +1,15 @@
+/*
+ * Queue.c
+ *
+ * Rasmus Östersjö
+ * 2014-12-19
+ *
+ * A generic and dynamic array implementation of a queue.
+ *
+ */
+
 #include "Queue.h"
-#include <stdlib.h>		// malloc
+#include <stdlib.h>		// malloc, free
 #include <string.h>		// memcpy
 
 static int queueGrow(queue_t* q)
@@ -40,7 +50,7 @@ int queueInit(queue_t* q, int elemSize, void (*freeFnk)(void*))
 	return q->elems ? SUCCESS : ERR_MALLOC;
 }
 
-int queueDispose(queue_t* q)
+void queueDispose(queue_t* q)
 {
 	void *tmp = NULL;
 
@@ -53,21 +63,19 @@ int queueDispose(queue_t* q)
 	free(q->elems);
 	q->capacity = q->currentSize = q->front = q->elemSize = -1;
 	q->elems = NULL;
-	
-	return 0;
 }
 
 int queueEnqueue(queue_t* q, void* elem)
 {
 	if (queueIsFull(q))
 		if (queueGrow(q) == ERR_REALLOC)
-			return ERR_REALLOC;
+			return ERR_MALLOC;
 	
 	// enqueue
 	int index = (q->front + q->currentSize) % q->capacity;
 	memcpy((char*) q->elems + index * q->elemSize, elem, q->elemSize);
 
-	q->currentSize++;
+	++q->currentSize;
 	return SUCCESS;
 }
 
@@ -80,7 +88,7 @@ int queueDequeue(queue_t* q, void* elem)
 	memcpy(elem, (char*) q->elems + q->front * q->elemSize, q->elemSize);
 	q->front = (q->front + 1) % q->capacity;
 
-	q->currentSize--;
+	--q->currentSize;
 	return SUCCESS;
 }
 
