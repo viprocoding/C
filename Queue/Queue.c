@@ -79,7 +79,7 @@ void queueDispose(queue_t* q)
 int queueEnqueue(queue_t* q, void* elem)
 {
     if (queueIsFull(q))
-        if (queueGrow(q) == ERR_REALLOC)
+        if (queueGrow(q) == ERR_MALLOC)
             return ERR_MALLOC;
     
     // enqueue

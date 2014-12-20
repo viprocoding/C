@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	queueInit(&q, sizeof(char*), stringFree);
 
 	for (int i = 0; i < 10; i++)
-		if (queueEnqueue(&q, &s) == ERR_REALLOC) {
+		if (queueEnqueue(&q, &s) == ERR_MALLOC) {
 			fprintf(stderr, "Error: Could not realloc during grow-procces.\n");
 			break;
 		}
