@@ -21,12 +21,14 @@
 #define ERR_INVALID_ARGUMENT -1
 #define ERR_MALLOC           -2
 #define ERR_REALLOC          -3
+#define ERR_EMPTY            -4
 
 // Queue data type
 typedef struct Queue
 {
 	int   capacity;
 	int   currentSize;
+	int   front;
 	int   elemSize;
 	void* elems;
 	// free fnk
