@@ -1,4 +1,5 @@
 #include "Queue.h"
+#include <stdlib.h>		// malloc
 
 static int queueGrow(queue_t* q)
 {
@@ -8,8 +9,16 @@ static int queueGrow(queue_t* q)
 
 int queueInit(queue_t* q, int elemSize /*, freeFnk ... */)
 {
-	// todo
-	return 0;
+	if (elemSize < 1)
+		return ERR_INVALID_ARGUMENT;
+	
+	// Initialize queue	
+	q->capacity = INIT_CAPACITY;
+	q->currentSize = 0;
+	q->elemSize = elemSize;
+	q->elems = malloc(q->capacity * q->elemSize);
+
+	return q->elems ? SUCCESS : ERR_MALLOC;
 }
 
 int queueDispose(queue_t* q)

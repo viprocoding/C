@@ -14,6 +14,12 @@
 // Libraries
 
 // Constants
+#define INIT_CAPACITY 1
+
+#define SUCCESS 0
+
+#define ERR_INVALID_ARGUMENT -1
+#define ERR_MALLOC           -2
 
 // Queue data type
 typedef struct Queue
