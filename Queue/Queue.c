@@ -1,3 +1,4 @@
+#include <stdio.h>
 /*
  * Queue.c
  *
@@ -59,16 +60,21 @@ int queueInit(queue_t* q, int elemSize, void (*freeFnk)(void*))
     return q->elems ? SUCCESS : ERR_MALLOC;
 }
 
+/**
+ * Note that the queue is never empty during the free-loop. Therefor, no error
+ * checking is necessary here.
+ */
 void queueDispose(queue_t* q)
 {
-    void *tmp = NULL;
+    if (q->freeFnk) {
+		char tmp[q->elemSize];
 
-    // free elements if there's a free function
-    if (q->freeFnk)
+		// free all elems that currently resides in the queue
         for (int i = 0, n = q->currentSize; i < n; i++) {
-            queueDequeue(q, tmp);   // here q is never empty -- dont error check
+            queueDequeue(q, &tmp);
             q->freeFnk(tmp);
         }
+	}
 
     // clean up
     free(q->elems);
