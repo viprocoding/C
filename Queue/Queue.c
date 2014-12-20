@@ -3,8 +3,15 @@
 
 static int queueGrow(queue_t* q)
 {
-	// todo
-	return 0;
+	// Grow by factor 2
+	q->capacity <<= 1;
+	void *tmp = realloc(q->elems, q->capacity * q->elemSize);
+
+	if (!tmp)
+		return ERR_REALLOC;
+	
+	q->elems = tmp;
+	return SUCCESS;
 }
 
 int queueInit(queue_t* q, int elemSize /*, freeFnk ... */)
@@ -29,7 +36,7 @@ int queueDispose(queue_t* q)
 
 int queueEnqueue(queue_t* q, void* elem)
 {
-	// todo
+	// todo	
 	return 0;
 }
 

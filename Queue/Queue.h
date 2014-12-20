@@ -20,6 +20,7 @@
 
 #define ERR_INVALID_ARGUMENT -1
 #define ERR_MALLOC           -2
+#define ERR_REALLOC          -3
 
 // Queue data type
 typedef struct Queue
