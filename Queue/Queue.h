@@ -2,7 +2,7 @@
  * Queue.h
  *
  * Rasmus Östersjö
- * 2014-12-19
+ * 2014-12-20
  *
  * A generic and dynamic array implementation of a queue.
  */
