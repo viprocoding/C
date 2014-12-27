@@ -30,4 +30,11 @@ void bubbleSort(int *a, int n);
  */
 void insertionSort(int *a, int n);
 
+/** Sort an array in increasing order using selection sort
+ *
+ * @param a     Pointer to an array that is to be sorted.
+ * @param n     Size of the array.
+ */
+void selectionSort(int *a, int n);
+
 #endif // __HEADER_H__

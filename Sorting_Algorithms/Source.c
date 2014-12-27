@@ -5,7 +5,7 @@
 //      1. a == 1111
 //      2. b == 0101    <-- Previous a
 //      3. a == 1010    <-- Previous b
-//          -- Swaped successfully --
+//          -- Swapped successfully --
 //
 // Function returns 1 to allow reducing expressions such as:
 //   swap(..., ...);    | swapped = swap(..., ...);
@@ -51,7 +51,8 @@ static int partition(int *a, int l, int r)
             p += swap(a + i, a + p);
 
     // place pivot element in the pivot possition
-    swap(a + p, a + r);
+    if (p != r)
+        swap(a + p, a + r);
 
     return p;
 }
@@ -91,13 +92,12 @@ static void merge(int *a, int an, int *b, int bn)
 
 void mergeSort(int *a, int n)
 {
-    // base case
-    if (n <= 1)
-        return;
-
-    mergeSort(a, n/2);              // sort left
-    mergeSort(a + n/2, n - n/2);    // sort right
-    merge(a, n/2, a + n/2, n- n/2); // merge left and right side
+    // valid array (not in base case)
+    if (n > 1) {
+        mergeSort(a, n/2);              // sort left
+        mergeSort(a + n/2, n - n/2);    // sort right
+        merge(a, n/2, a + n/2, n- n/2); // merge left and right side
+    }
 }
 
 ///////////////////////////// Bubble sort /////////////////////////////////////
@@ -120,4 +120,23 @@ void insertionSort(int *a, int size)
     for (int i = 0, n = size - 1; i < n; i++)
         for (int j = i; j > 0 && *(a + j) < *(a + j - 1); j--)
                 swap(a + j, a + j - 1);
+}
+
+///////////////////////////// Selection Sort ///////////////////////////////////
+
+void selectionSort(int *a, int size)
+{
+    for (int i = 0, n = size - 1; i < n; i++) {
+        // the first element in the unsorted part is currently the smallest one
+        int min = i;
+
+        // Find the smallest element left in the unsorted part
+        for (int j = i + 1; j < size; j++)
+            if (*(a + j) < *(a + min))
+                min = j;
+
+        // Place the smallest element in its correct position
+        if (i != min)
+            swap(a + i, a + min);
+    }
 }
