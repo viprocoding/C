@@ -9,4 +9,11 @@
  */
 void quickSort(int *a, int l, int r);
 
+/** Sort an array in increasing order using merge sort.
+ *
+ * @param a     Pointer to an array that is to be sorted.
+ * @param n     Size of the array.
+ */
+void mergeSort(int *a, int n);
+
 #endif // __HEADER_H__
