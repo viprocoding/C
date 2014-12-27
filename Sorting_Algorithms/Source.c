@@ -99,3 +99,21 @@ void mergeSort(int *a, int n)
     mergeSort(a + n/2, n - n/2);    // sort right
     merge(a, n/2, a + n/2, n- n/2); // merge left and right side
 }
+
+///////////////////////////// Bubble sort /////////////////////////////////////
+
+void bubbleSort(int *a, int n)
+{
+    int swapped = 1;
+
+    // Loop at most n - 1 times -- stop early if no swaps occured
+    for (int i = 1; i < n && swapped; i++) {
+        // so far no swaps
+        swapped = 0;
+
+        // let the current largest element bubble up to the sorted part
+        for (int j = 0, jn = n - i; j < jn; j++)
+            if (*(a + j) > *(a + j + 1))
+                swapped = swap(a + j, a + j + 1);
+    }
+}

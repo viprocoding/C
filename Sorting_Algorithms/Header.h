@@ -16,4 +16,11 @@ void quickSort(int *a, int l, int r);
  */
 void mergeSort(int *a, int n);
 
+/** Sort an array in increasing order using bubble sort.
+ *
+ * @param a     Pointer to an array that is to be sorted.
+ * @param n     Size of the array.
+ */
+void bubbleSort(int *a, int n);
+
 #endif // __HEADER_H__
