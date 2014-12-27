@@ -58,7 +58,7 @@ static int partition(int *a, int l, int r)
 
 void quickSort(int *a, int l, int r)
 {
-    // base case
+    // Valid array (not in base case)
     if (l < r) {
         int p = partition(a, l, r); // find pivot
         quickSort(a, l, p - 1);     // sort left side of pivot
@@ -91,7 +91,7 @@ static void merge(int *a, int an, int *b, int bn)
 
 void mergeSort(int *a, int n)
 {
-    // Valid array (not in base case)
+    // base case
     if (n <= 1)
         return;
 
