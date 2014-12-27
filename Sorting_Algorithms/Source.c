@@ -104,13 +104,8 @@ void mergeSort(int *a, int n)
 
 void bubbleSort(int *a, int n)
 {
-    int swapped = 1;
-
     // Loop at most n - 1 times -- stop early if no swaps occured
-    for (int i = 1; i < n && swapped; i++) {
-        // so far no swaps
-        swapped = 0;
-
+    for (int i = 1, swapped = 1; i < n && swapped--; i++) {
         // let the current largest element bubble up to the sorted part
         for (int j = 0, jn = n - i; j < jn; j++)
             if (*(a + j) > *(a + j + 1))
