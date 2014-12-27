@@ -91,7 +91,7 @@ static void merge(int *a, int an, int *b, int bn)
 
 void mergeSort(int *a, int n)
 {
-    // base case
+    // Valid array (not in base case)
     if (n <= 1)
         return;
 
