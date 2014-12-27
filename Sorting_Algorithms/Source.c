@@ -102,13 +102,22 @@ void mergeSort(int *a, int n)
 
 ///////////////////////////// Bubble sort /////////////////////////////////////
 
+// Optimized version
 void bubbleSort(int *a, int n)
 {
     // Loop at most n - 1 times -- stop early if no swaps occured
-    for (int i = 1, swapped = 1; i < n && swapped--; i++) {
+    for (int i = 1, swapped = 1; i < n && swapped--; i++)
         // let the current largest element bubble up to the sorted part
         for (int j = 0, jn = n - i; j < jn; j++)
             if (*(a + j) > *(a + j + 1))
                 swapped = swap(a + j, a + j + 1);
-    }
+}
+
+///////////////////////////// Insertion Sort ///////////////////////////////////
+
+void insertionSort(int *a, int size)
+{
+    for (int i = 0, n = size - 1; i < n; i++)
+        for (int j = i; j > 0 && *(a + j) < *(a + j - 1); j--)
+                swap(a + j, a + j - 1);
 }

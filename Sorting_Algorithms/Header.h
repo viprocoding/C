@@ -23,4 +23,11 @@ void mergeSort(int *a, int n);
  */
 void bubbleSort(int *a, int n);
 
+/** Sort an array in increasing order using insertion sort
+ *
+ * @param a     Pointer to an array that is to be sorted.
+ * @param n     Size of the array.
+ */
+void insertionSort(int *a, int n);
+
 #endif // __HEADER_H__
