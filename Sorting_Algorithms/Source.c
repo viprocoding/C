@@ -1,16 +1,46 @@
 #include "Header.h"
 
+// Swaps a and b without using a temporary variable.
+//  Example: Let a = 0101, b = 1010
+//      1. a == 1111
+//      2. b == 0101    <-- Previous a
+//      3. a == 1010    <-- Previous b
+//          -- Swaped successfully --
+//
+// Function returns 1 to allow reducing expressions such as:
+//   swap(..., ...);    | swapped = swap(..., ...);
+//   swapped = 1;       |
+//
+//   swap(..., ...);    | flag += swap(..., ...);
+//   flag++;            |
+////
 static int swap(int *a, int *b)
 {
-    int tmp = *a;
-    *a      = *b;
-    *b      = tmp;
+    *a = *a ^ *b;
+    *b = *a ^ *b;
+    *a = *a ^ *b;
 
     return 1;
 }
 
 ///////////////////////////// Quick sort ///////////////////////////////////////
 
+// Algorithm:
+// ----------
+//  1. Choose the arrays ending element (indexed by r) to be the pivot element.
+//  2. Assume the pivot's correct index is indexed by the first element (l).
+//  3. Traverse the array one element at a time (excluding the final index r)
+//      -- If there's an element less or equal to the pivot it should be placed
+//         to the left of the pivot's index.
+//          --> Swap this element with the element indexed by the pivot indexer.
+//          --> Increment the pivot indexer by 1.
+//  4. All elements less than or equal to the pivot element can be found to the
+//     left side of the pivot index, and all elements greater than the pivot can
+//     be found to the right side of the pivot index.
+//          --> Swap the pivot element (indexed by r) with the element indexed
+//              by the pivot indexer. The pivot is now in the correct position.
+//  5. Return the pivot index.
+////
 static int partition(int *a, int l, int r)
 {
     int p = l;
